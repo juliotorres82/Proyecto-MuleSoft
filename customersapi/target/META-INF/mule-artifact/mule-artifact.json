@@ -1,0 +1,34 @@
+{
+  "configs": [
+    "global.xml",
+    "customers.xml"
+  ],
+  "secureProperties": [],
+  "supportedJavaVersions": [],
+  "redeploymentEnabled": true,
+  "name": "f8c72364-82eb-46b3-815e-4e4ea04c9070:customersapi:1.0.0",
+  "minMuleVersion": "4.9.0",
+  "requiredProduct": "MULE_EE",
+  "classLoaderModelLoaderDescriptor": {
+    "id": "mule",
+    "attributes": {
+      "exportedPackages": [],
+      "exportedResources": [
+        "api/customers-api.raml",
+        "application-types.xml",
+        "customers.xml",
+        "dev.properties",
+        "dev.secure.properties",
+        "examples/json-BD.json",
+        "global.xml",
+        "local.properties",
+        "local.secure.properties",
+        "log4j2.xml"
+      ]
+    }
+  },
+  "bundleDescriptorLoader": {
+    "id": "mule",
+    "attributes": {}
+  }
+}

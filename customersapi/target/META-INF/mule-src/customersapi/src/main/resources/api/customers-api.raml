@@ -1,0 +1,22 @@
+#%RAML 1.0
+title: Customers API
+version: v1
+baseUri: /api/v1/sps
+
+/customers:
+  get:
+    description: Returns all customers
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              [
+                {
+                  
+                  "FirstName": "Maura",
+                  "LastName": "Wagstaffe",
+                  "Email": "mwagstaffe@npr.org",
+                  "Company": "Kazu"
+                }
+              ]
