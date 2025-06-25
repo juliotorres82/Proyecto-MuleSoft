@@ -1,0 +1,9 @@
+{
+  "minMuleVersion": "4.9.0",
+  "api": {
+    "apiId": "20410740"
+  },
+  "javaSpecificationVersions": [
+    "17"
+  ]
+}

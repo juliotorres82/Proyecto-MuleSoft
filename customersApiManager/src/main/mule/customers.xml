@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:db="http://www.mulesoft.org/schema/mule/db"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	
+	<db:config name="Database_Config" doc:name="Database Config" doc:id="d9ddaf2f-acd2-404a-bd41-ec1b634d9d01" >
+		<db:my-sql-connection host="${db.host}" port="${db.port}" user="mule" password="mule" database="${db.name}" />
+	</db:config>
+	<flow name="customersapiFlow" doc:id="8f1f413b-5d93-4929-b5a3-83bbebc5f1f9" >
+		<http:listener doc:name="Listener" doc:id="052df434-1b9b-40d2-9f02-46d1d047ab58" config-ref="HTTP_Listener_config" path="/api/v1/sps/customers"/>
+		<db:select doc:name="Select" doc:id="6a77f7aa-3ff9-4e09-b0fc-66bc21faa88a" config-ref="Database_Config">
+			<db:sql ><![CDATA[SELECT * FROM customers;]]></db:sql>
+		</db:select>
+		<ee:transform doc:name="Transform Message" doc:id="8f204038-b56d-44ea-8274-5877bd69432c" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+payload map ( payload01 , indexOfPayload01 ) -> {
+	FirstName: payload01.FirstName,
+	LastName: payload01.LastName,
+	Email: payload01.Email,
+	Company: payload01.Company
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="90a74471-24b4-4a46-bc61-47378fdd7097" message="Informacion recibida"/>
+	</flow>
+</mule>

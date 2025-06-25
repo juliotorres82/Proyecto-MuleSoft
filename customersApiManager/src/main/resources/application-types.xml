@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<types:mule xmlns:types="http://www.mulesoft.org/schema/mule/types">
+  <types:catalog>
+    <types:type name="base" format="json">
+      <types:shape format="weave" example="examples/json-BD.json"><![CDATA[%dw 2.0
+
+type base = Array<{|  FirstName: String,   LastName: String,   Email: String,   Company: String|}> {"example": "[{\\\"FirstName\\\":\\\"Maura\\\",\\\"LastName\\\":\\\"Wagstaffe\\\",\\\"Email\\\":\\\"mwagstaffe@npr.org\\\",\\\"Company\\\":\\\"Kazu\\\"},{\\\"FirstName\\\":\\\"Myrwwyn\\\",\\\"LastName\\\":\\\"Eliet\\\",\\\"Email\\\":\\\"meliet1@buzzfeed.com\\\",\\\"Company\\\":\\\"Skibox\\\"}]"}
+
+]]></types:shape>
+    </types:type>
+  </types:catalog>
+  <types:enrichment select="#6a77f7aa-3ff9-4e09-b0fc-66bc21faa88a">
+    <types:processor-declaration>
+      <types:output-event>
+        <types:message>
+          <types:payload type="base"/>
+        </types:message>
+      </types:output-event>
+    </types:processor-declaration>
+  </types:enrichment>
+  <types:enrichment select="#8f204038-b56d-44ea-8274-5877bd69432c">
+    <types:processor-declaration>
+      <types:output-event>
+        <types:message>
+          <types:payload type="base"/>
+        </types:message>
+      </types:output-event>
+    </types:processor-declaration>
+  </types:enrichment>
+</types:mule>
